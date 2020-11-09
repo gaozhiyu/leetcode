@@ -1,53 +1,39 @@
-package leetcode;
-
-import java.util.Arrays;
+package leetcode.dp;
 
 import org.junit.Test;
 
 import junit.framework.Assert;
 
-public class HouseRob2 {
+public class HouseRob1 {
 
 	@Test
 	public void test() {
-		int[] num = { 2,3,2 };
-		Assert.assertEquals(rob(num), 3);
+		int[] num = { 1, 2, 3, 1 };
+		Assert.assertEquals(rob(num), 4);
 	}
 
 	@Test
 	public void test2() {
-		int[] num = { 1,2,3,1 };
-		Assert.assertEquals(rob(num), 4);
+		int[] num = { 2, 7, 9, 3, 1 };
+		Assert.assertEquals(rob(num), 12);
 	}
 
 	public int rob(int[] nums) {
-		int length = nums.length;
-		if(length==0) {
-			return 0;
-		}else if(length == 1){
-			return nums[length-1];
-		}else {
-			int sums[] = new int[nums.length];
-			for (int i = 0; i< nums.length; i++) {
-				sums[i]=0;
-			}
-			int firstRob = robTotal( nums, sums,2, nums.length-2);
-			int sum2[] = new int[nums.length];
-			for (int i = 0; i< nums.length; i++) {
-				sum2[i]=0;
-			}
-			int firstNot = robTotal( nums, sum2,1, nums.length-1); 
-			int finalResult = Math.max(nums[0]+firstRob,firstNot);
-			return finalResult;
+		int sums[] = new int[nums.length];
+		for (int i = 0; i< nums.length; i++) {
+			sums[i]=0;
 		}
-		
+		return robTotal(nums,sums);
 	}
-	public int robTotal(int[] nums, int sums[],int start, int end) {
+	public int robTotal(int[] nums, int sums[]) {
 		//int sum = 0;
-		for (int i = start; i< end+1; i++) {
+		for (int i = 0; i< nums.length; i++) {
 			robRecAtIndex(i, nums, sums);
 		}
-		return sums[end];
+		if(nums.length>0) 
+		    return sums[nums.length-1];
+        else
+            return 0;
 	}
 	
 	public void robRecAtIndex(int index,  int[] nums, int[] sums) {
