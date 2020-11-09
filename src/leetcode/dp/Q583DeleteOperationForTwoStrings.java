@@ -83,7 +83,6 @@ public class Q583DeleteOperationForTwoStrings {
     public List<Integer> getIndices(String word, String charecter){
     	if(hashMap.get(charecter)!=null)
     		return hashMap.get(charecter);
-    	System.out.println("processing");
     	List<Integer> indices = new ArrayList();
     	int fromIndex = -1;
     	while(true) {
